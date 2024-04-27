@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
@@ -29,6 +29,26 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    const touristCollection = client.db('touristSpotDB').collection('touristSpot')
+
+    app.get('/addTouristsSports', async(req,res)=>{
+      const cursor = touristCollection.find()
+      const result = await cursor.toArray()
+      res.send(result)
+    })
+    app.get('/addTouristsSports/:_id',async (req,res)=>{
+      const id = req.params._id
+      const query = {_id : new ObjectId(id)}
+      const result = await touristCollection.findOne(query)
+      res.send(result)
+    })
+
+    app.post('/addTouristsSports',async(req,res)=>{
+      const newSpots = req.body;
+      console.log(newSpots)
+      const result = await touristCollection.insertOne(newSpots)
+      res.send(result)
+    })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
