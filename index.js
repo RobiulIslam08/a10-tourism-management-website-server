@@ -36,12 +36,23 @@ async function run() {
       const result = await cursor.toArray()
       res.send(result)
     })
+    app.get('/allTouristsSports', async(req,res)=>{
+      const cursor = touristCollection.find()
+      const result = await cursor.toArray()
+      res.send(result)
+    })
     app.get('/addTouristsSports/:_id',async (req,res)=>{
       const id = req.params._id
       const query = {_id : new ObjectId(id)}
       const result = await touristCollection.findOne(query)
       res.send(result)
     })
+    // app.get('/allTouristsSports/:_id',async (req,res)=>{
+    //   const id = req.params._id
+    //   const query = {_id : new ObjectId(id)}
+    //   const result = await touristCollection.findOne(query)
+    //   res.send(result)
+    // })
 
     app.post('/addTouristsSports',async(req,res)=>{
       const newSpots = req.body;
