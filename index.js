@@ -53,22 +53,18 @@ async function run() {
       const result = await touristCollection.find({email:req.params.email}).toArray()
       res.send(result)
     })
-  //   app.get('/mylist/:email', async (req, res) => {
-  //     try {
-  //         const email = req.params.email;
-  //         const result = await touristCollection.find({ email }).toArray();
-  //         res.json(result);
-  //     } catch (error) {
-  //         console.error('Error fetching data:', error);
-  //         res.status(500).json({ error: 'Internal server error' });
-  //     }
-  // });
-  
 
     app.post('/addTouristsSports',async(req,res)=>{
       const newSpots = req.body;
       console.log(newSpots)
       const result = await touristCollection.insertOne(newSpots)
+      res.send(result)
+    })
+
+    app.delete('/mylist/:id', async (req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristCollection.deleteOne(query);
       res.send(result)
     })
     // Send a ping to confirm a successful connection
