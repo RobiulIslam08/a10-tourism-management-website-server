@@ -54,7 +54,7 @@ async function run() {
       res.send(result)
     })
 
-    app.post('/addTouristsSports',async(req,res)=>{j
+    app.post('/addTouristsSports',async(req,res)=>{
       const newSpots = req.body;
       console.log(newSpots)
       const result = await touristCollection.insertOne(newSpots)
@@ -65,6 +65,31 @@ async function run() {
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const result = await touristCollection.deleteOne(query);
+      res.send(result)
+    })
+    app.put('/mylist/:id' ,async (req, res)=>{
+      const id = req.params.id;
+      const tourist =req.body;
+      console.log("update tourist", tourist,"id:",id)
+      const filter = {_id: new ObjectId(id)};
+      const options = {upsert:true};
+      const updateTourist = {
+        
+        // const updatedTouristField = {name,country,image,spotName,visitor, travelTime,seasonality,averageCost,description,location}
+        $set: {
+          name: tourist.name,
+          country: tourist.country,
+          image: tourist.image,
+          spotName: tourist.spotName,
+          visitor: tourist.visitor,
+          travelTime: tourist.travelTime,
+          seasonality: tourist.seasonality,
+          averageCost: tourist.averageCost,
+          description: tourist.description,
+          location: tourist.location
+        }
+      }
+      const result = await touristCollection.updateOne(filter,updateTourist, options)
       res.send(result)
     })
     // Send a ping to confirm a successful connection
