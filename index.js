@@ -54,7 +54,7 @@ async function run() {
       res.send(result)
     })
 
-    app.post('/addTouristsSports',async(req,res)=>{
+    app.post('/addTouristsSports',async(req,res)=>{j
       const newSpots = req.body;
       console.log(newSpots)
       const result = await touristCollection.insertOne(newSpots)
