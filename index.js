@@ -75,7 +75,7 @@ async function run() {
       const options = {upsert:true};
       const updateTourist = {
         
-        // const updatedTouristField = {name,country,image,spotName,visitor, travelTime,seasonality,averageCost,description,location}
+        // const updatedTouristField = {name,country,image,spotName,visitor, travelTime,seasonality,averageCost,description,location}dffdsfdsfdsf
         $set: {
           name: tourist.name,
           country: tourist.country,
