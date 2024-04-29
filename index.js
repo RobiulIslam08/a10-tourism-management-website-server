@@ -74,7 +74,7 @@ async function run() {
       const filter = {_id: new ObjectId(id)};
       const options = {upsert:true};
       const updateTourist = {
-        
+    
         // const updatedTouristField = {name,country,image,spotName,visitor, travelTime,seasonality,averageCost,description,location}dffdsfdsfdsf
         $set: {
           name: tourist.name,
