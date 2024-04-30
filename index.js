@@ -6,9 +6,15 @@ const app = express()
 const port = process.env.PORT || 5000
 
 // middleWare
-app.use(cors())
+// app.use(cors())
 
 app.use(express.json())
+// Middleware Connections
+const corsConfig = {
+  origin: ["http://localhost:5173","https://a10-tourism-management-websit.web.app"],
+  credentials: true,
+};
+app.use(cors(corsConfig));
  
 
 
@@ -74,7 +80,7 @@ async function run() {
       const filter = {_id: new ObjectId(id)};
       const options = {upsert:true};
       const updateTourist = {
-    
+
         // const updatedTouristField = {name,country,image,spotName,visitor, travelTime,seasonality,averageCost,description,location}dffdsfdsfdsf
         $set: {
           name: tourist.name,
@@ -108,7 +114,7 @@ run().catch(console.dir);
 
 
 
-
+ 
 
 
 
